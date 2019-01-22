@@ -28,10 +28,10 @@ require 'halo-pelanggan/function/indo_date3.php';
 </head>
 
 <body>
-    
+
 
     <!-- ***** Search Form Area ***** -->
-    
+
 
     <!-- ***** Header Area Start ***** -->
     <header class="header_area" id="header">
@@ -96,7 +96,7 @@ require 'halo-pelanggan/function/indo_date3.php';
                                         <option value="show-all" selected="selected">== Pilih Tujuan Pergi ==</option>
                                                 <?php
                                                 require_once 'halo-pelanggan/function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan');
+                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan GROUP by tujuan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -108,7 +108,7 @@ require 'halo-pelanggan/function/indo_date3.php';
                                         <option value="show-all" selected="selected">== Pilih Kelas Kendaraan ==</option>
                                                 <?php
                                                 require_once 'halo-pelanggan/function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM kendaraan');
+                                                $stmt = $db->prepare('SELECT * FROM kendaraan GROUP by kelas_kendaraan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -121,11 +121,11 @@ require 'halo-pelanggan/function/indo_date3.php';
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        
+
     </section>
     <!-- ***** Welcome Area End ***** -->
 
@@ -193,7 +193,7 @@ require 'halo-pelanggan/function/indo_date3.php';
         </div>
     </section>
     <!-- ***** About Area End ***** -->
-    
+
 
     <!-- ****** Footer Area Start ****** -->
     <footer class="dorne-footer-area">

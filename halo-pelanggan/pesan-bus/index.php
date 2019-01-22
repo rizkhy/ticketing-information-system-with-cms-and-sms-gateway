@@ -8,7 +8,7 @@ if (!isset($_SESSION['no_telp'])) {
 
 ?>
 
-<?php 
+<?php
 include '../function/indo_date.php';
 include '../function/indo_date2.php';
 include '../function/indo_date3.php';
@@ -21,7 +21,7 @@ error_reporting(0);
 <!doctype html>
 <html lang="en">
 
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -50,7 +50,7 @@ error_reporting(0);
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
-                        
+
                         <li class="nav-item dropdown notification">
                             <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
@@ -168,7 +168,7 @@ John Abraham</span>is now following you
                                                 <option value="show-all" selected="selected">== Pilih Tujuan Pergi ==</option>
                                                 <?php
                                                 require_once '../function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan');
+                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan GROUP by tujuan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -183,7 +183,7 @@ John Abraham</span>is now following you
                                                 <option value="show-all" selected="selected">== Pilih Kelas Kendaraan ==</option>
                                                 <?php
                                                 require_once '../function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM kendaraan');
+                                                $stmt = $db->prepare('SELECT * FROM kendaraan GROUP by kelas_kendaraan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -192,11 +192,11 @@ John Abraham</span>is now following you
                                                 <?php endwhile; ?>
                                                 </select>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
                                                 <label class="be-checkbox custom-control custom-checkbox">
-                                                    
+
                                                 </label>
                                             </div>
                                             <div class="col-sm-6 pl-0">
@@ -229,5 +229,5 @@ John Abraham</span>is now following you
     <script src="../assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="../assets/libs/js/main-js.js"></script>
 </body>
- 
+
 </html>
