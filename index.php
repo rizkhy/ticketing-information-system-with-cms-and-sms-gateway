@@ -104,7 +104,7 @@ require 'halo-pelanggan/function/indo_date3.php';
                                                 <option value="<?php echo $row['id_jadwal']; ?>"><?php echo indonesian_date_only($row['tgl_berangkat']); ?> - <?php echo indonesian_hour_only($row['jam']); ?> - <?php echo $row['tujuan']; ?></option>
                                                 <?php endwhile; ?>
                                     </select>
-                                    <select class="custom-select" id="id_kendaraan" name="id_kendaraan">
+                                    <select class="custom-select" id="kelas_kendaraan" name="kelas_kendaraan">
                                         <option value="show-all" selected="selected">== Pilih Kelas Kendaraan ==</option>
                                                 <?php
                                                 require_once 'halo-pelanggan/function/pengaturan.php';
@@ -113,7 +113,7 @@ require 'halo-pelanggan/function/indo_date3.php';
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
                                                 <?php extract($row); ?>
-                                                <option value="<?php echo $row['id_kendaraan']; ?>"><?php echo $row['kelas_kendaraan']; ?></option>
+                                                <option value="<?php echo $row['kelas_kendaraan']; ?>"><?php echo $row['kelas_kendaraan']; ?></option>
                                                 <?php endwhile; ?>
                                     </select>
                                     <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Cari Bus</button>

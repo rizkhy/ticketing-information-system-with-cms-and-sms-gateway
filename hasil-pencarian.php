@@ -112,8 +112,8 @@ require 'halo-pelanggan/function/rupiah.php';
 				<?php
 require 'halo-pelanggan/function/kon.php';
 $id_jadwal = $_GET['id_jadwal'];
-$id_kendaraan = $_GET['id_kendaraan'];
-$query = mysqli_query($kon, "select id_jadwal, tgl_berangkat, jam, tujuan, harga, id_kendaraan, nomor_kendaraan, merek_kendaraan, kelas_kendaraan, harga_kelas, SUM(harga+harga_kelas) as total from jadwal_keberangkatan,kendaraan where id_jadwal='$id_jadwal' and id_kendaraan='$id_kendaraan'") or die("Gagal query");
+$kelas_kendaraan = $_GET['kelas_kendaraan'];
+$query = mysqli_query($kon, "select id_jadwal, tgl_berangkat, jam, tujuan, harga, id_kendaraan, nomor_kendaraan, merek_kendaraan, kelas_kendaraan, harga_kelas, SUM(harga+harga_kelas) as total from jadwal_keberangkatan,kendaraan where id_jadwal='$id_jadwal' and kelas_kendaraan='$kelas_kendaraan'") or die("Gagal query");
 while ($r = mysqli_fetch_assoc($query)) { ?>
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-features-area mb-50">
