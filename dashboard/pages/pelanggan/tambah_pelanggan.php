@@ -42,12 +42,12 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="i-checks pull-left">
                                                             <label>
-                                                                <input type="radio" value="Pria" name="jk"> <i></i> Pria </label>
+                                                                <input type="radio" value="Pria" name="jk"> Pria </label>
                                                         </div>
                                                         <br/><br/>
                                                         <div class="i-checks pull-left">
                                                             <label>
-                                                                <input type="radio" value="Wanita" name="jk"> <i></i> Wanita </label>
+                                                                <input type="radio" value="Wanita" name="jk"> Wanita </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,7 +96,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            
+
                                                         </div>
                                                         <div class="login-horizental cancel-wp pull-left form-bc-ele">
                                                             <input class="btn btn-white" onclick="window.history.back()" type="reset" />

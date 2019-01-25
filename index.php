@@ -92,23 +92,47 @@ require 'halo-pelanggan/function/indo_date3.php';
                             <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
                                 <h6>Kemana tujuan Anda?</h6>
                                 <form action="hasil-pencarian.php" method="GET">
-                                    <select class="custom-select" id="id_jadwal" name="id_jadwal">
-                                        <option value="show-all" selected="selected">== Pilih Tujuan Pergi ==</option>
+                                    <select class="custom-select" name="tujuan">
+                                        <option value="show-all" selected="selected">= Tujuan =</option>
                                                 <?php
                                                 require_once 'halo-pelanggan/function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan GROUP by tujuan');
+                                                $stmt = $db->prepare('SELECT tujuan FROM jadwal_keberangkatan GROUP BY tujuan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
                                                 <?php extract($row); ?>
-                                                <option value="<?php echo $row['id_jadwal']; ?>"><?php echo indonesian_date_only($row['tgl_berangkat']); ?> - <?php echo indonesian_hour_only($row['jam']); ?> - <?php echo $row['tujuan']; ?></option>
+                                                <option value="<?php echo $row['tujuan']; ?>"><?php echo $row['tujuan']; ?></option>
+                                                <?php endwhile; ?>
+                                    </select>
+                                    <select class="custom-select" name="tgl_berangkat">
+                                        <option value="show-all" selected="selected">= Tanggal =</option>
+                                                <?php
+                                                require_once 'halo-pelanggan/function/pengaturan.php';
+                                                $stmt = $db->prepare('SELECT tgl_berangkat FROM jadwal_keberangkatan GROUP BY tgl_berangkat');
+                                                $stmt->execute();
+                                                ?>
+                                                <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
+                                                <?php extract($row); ?>
+                                                <option value="<?php echo $row['tgl_berangkat']; ?>"><?php echo indonesian_date_only($row['tgl_berangkat']); ?></option>
+                                                <?php endwhile; ?>
+                                    </select>
+                                    <select class="custom-select" name="jam">
+                                        <option value="show-all" selected="selected">= Jam =</option>
+                                                <?php
+                                                require_once 'halo-pelanggan/function/pengaturan.php';
+                                                $stmt = $db->prepare('SELECT jam FROM jadwal_keberangkatan GROUP BY jam');
+                                                $stmt->execute();
+                                                ?>
+                                                <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
+                                                <?php extract($row); ?>
+                                                <option value="<?php echo $row['jam']; ?>"><?php echo indonesian_hour_only($row['jam']); ?></option>
                                                 <?php endwhile; ?>
                                     </select>
                                     <select class="custom-select" id="kelas_kendaraan" name="kelas_kendaraan">
-                                        <option value="show-all" selected="selected">== Pilih Kelas Kendaraan ==</option>
+                                        <option value="show-all" selected="selected">= Kelas Kendaraan =</option>
                                                 <?php
                                                 require_once 'halo-pelanggan/function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM kendaraan GROUP by kelas_kendaraan');
+                                                $stmt = $db->prepare('SELECT * FROM kendaraan GROUP BY kelas_kendaraan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -116,7 +140,11 @@ require 'halo-pelanggan/function/indo_date3.php';
                                                 <option value="<?php echo $row['kelas_kendaraan']; ?>"><?php echo $row['kelas_kendaraan']; ?></option>
                                                 <?php endwhile; ?>
                                     </select>
-                                    <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Cari Bus</button>
+                            </div>
+                            <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
+                                    <p  style="text-align: center">
+                                        <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Cari Bus</button>
+                                    </p>
                                 </form>
                             </div>
                         </div>

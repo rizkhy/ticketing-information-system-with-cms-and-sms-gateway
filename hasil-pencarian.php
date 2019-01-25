@@ -111,30 +111,57 @@ require 'halo-pelanggan/function/rupiah.php';
                 <!-- Single Features Area -->
 				<?php
 require 'halo-pelanggan/function/kon.php';
-$id_jadwal = $_GET['id_jadwal'];
+$jam = $_GET['jam'];
+$tgl_berangkat = $_GET['tgl_berangkat'];
+$tujuan = $_GET['tujuan'];
 $kelas_kendaraan = $_GET['kelas_kendaraan'];
-$query = mysqli_query($kon, "select id_jadwal, tgl_berangkat, jam, tujuan, harga, id_kendaraan, nomor_kendaraan, merek_kendaraan, kelas_kendaraan, harga_kelas, SUM(harga+harga_kelas) as total from jadwal_keberangkatan,kendaraan where id_jadwal='$id_jadwal' and kelas_kendaraan='$kelas_kendaraan'") or die("Gagal query");
-while ($r = mysqli_fetch_assoc($query)) { ?>
+$sql = "SELECT kendaraan.*, jadwal_keberangkatan.*, SUM(harga+harga_kelas) AS total
+                             FROM jadwal_keberangkatan,kendaraan
+                             WHERE tgl_berangkat='$tgl_berangkat' AND kelas_kendaraan='$kelas_kendaraan' AND jam='$jam' AND tujuan='$tujuan'";
+$query2 = mysqli_query($kon, $sql) or die("Gagal query");
+
+$data = mysqli_num_rows($query2);
+
+if ($data > 0) {
+  $query = mysqli_query($kon, "SELECT kendaraan.*, jadwal_keberangkatan.*, SUM(harga+harga_kelas) AS total
+                               FROM jadwal_keberangkatan,kendaraan
+                               WHERE tgl_berangkat='$tgl_berangkat' AND kelas_kendaraan='$kelas_kendaraan' AND jam='$jam' AND tujuan='$tujuan'") or die("Gagal query");
+
+  while ($r = mysqli_fetch_assoc($query)) {
+    if($r['merek_kendaraan'] != null){
+          ?>
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-features-area mb-50">
-					<img src="img/bus1.jpg" alt="" width="500" height="500">
-                        <!-- Price -->
+					              <img src="img/bus1.jpg" alt="" width="500" height="500">
                         <div class="feature-content d-flex align-items-center justify-content-between">
                             <div class="feature-title">
                                 <h5><?= $r['tujuan']; ?></h5>
-                                <p>Tanggal Berangkat: <?= indonesian_date_only($r['tgl_berangkat']); ?><br/>
-								Jam Berangkat: <?= indonesian_hour_only($r['jam']); ?><br/>
-								Merek Kendaraan: <?= $r['merek_kendaraan']; ?><br/>
-                                Nomor Kendaraan: <?= $r['nomor_kendaraan']; ?><br/>
-								</p>
-								<div class="feature-favourite">
-                                <a href="#"><?= rupiah($r['total']); ?></a>
-								</div>
+                                <p>
+                                  Tanggal Berangkat: <?= indonesian_date_only($r['tgl_berangkat']); ?><br/>
+                  								Jam Berangkat: <?= indonesian_hour_only($r['jam']); ?><br/>
+                  								Merek Kendaraan: <?= $r['merek_kendaraan']; ?><br/>
+                                  Nomor Kendaraan: <?= $r['nomor_kendaraan']; ?><br/>
+								                </p>
+                								<div class="feature-favourite">
+                                                <a href="#"><?= rupiah($r['total']); ?></a>
+                								</div>
                             </div>
                         </div>
                     </div>
                 </div>
-<?php } ?>
+  <?php
+}else {
+  ?>
+                <div class="col-12 col-sm-12 col-lg-12">
+                    <div class="feature-title">
+                        <h5 style="text-align: center">Tidak Ada Jadwal Yang Ditemukan</h5>
+                    </div>
+                </div>
+  <?php
+}
+      }
+    }
+ ?>
             </div>
         </div>
     </section>

@@ -168,7 +168,7 @@ error_reporting(0);
                                                 <option value="show-all" selected="selected">== Pilih Tujuan Pergi ==</option>
                                                 <?php
                                                 require_once '../function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan GROUP by tujuan');
+                                                $stmt = $db->prepare('SELECT * FROM jadwal_keberangkatan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -183,7 +183,7 @@ error_reporting(0);
                                                 <option value="show-all" selected="selected">== Pilih Kelas Kendaraan ==</option>
                                                 <?php
                                                 require_once '../function/pengaturan.php';
-                                                $stmt = $db->prepare('SELECT * FROM kendaraan GROUP by kelas_kendaraan');
+                                                $stmt = $db->prepare('SELECT * FROM kendaraan');
                                                 $stmt->execute();
                                                 ?>
                                                 <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
